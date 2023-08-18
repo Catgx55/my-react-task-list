@@ -1,21 +1,20 @@
-function List ({task, isTask})  {
-    return (
-        <li className="list">
-            {isTask ? (<del>{task +' ✔'}</del>) : (task + '❌')} 
-        </li>
-    )
-}
+import style from '../style/task.module.css';
+import { BsFillCheckCircleFill } from 'react-icons/bs';
+import { TbTrash } from 'react-icons/tb';
 
-const Task = () => {
+const Task = ({task, onDelete, onComplete}) => {
+    console.log(task);
     return(
-        <div>
-            <ol>
-                <List isTask={false} task={"Terminar proyectos de Ada School"} />
-                <List isTask={true} task={"Organizar la cama"} />
-                <List isTask={false} task={"Ver la clases de Ada School"} />
-                <List isTask={true} task={"Terminar el Todo App"} />
-                <List isTask={false} task={"Terminar la seccion React Hooks de Ada School"} />
-            </ol>
+        <div className={style.task}>
+            <button className={style.checkContainer} onClick={() => onComplete(task.id)}>
+                {task.isCompleted ? <BsFillCheckCircleFill /> : <div />}
+            </button>
+
+            <p className={task.isCompleted ? style.textCompleted : " "}>{task.title}</p>
+
+            <button className={style.deleteButton} onClick={() => onDelete(task.id)}>
+                <TbTrash size={20} />
+            </button>
         </div>
     )
 

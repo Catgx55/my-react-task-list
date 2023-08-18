@@ -1,25 +1,29 @@
 import Task from "./Task";
+import style from "../style/taskLists.module.css";
 
-const TaskList = () => {
-    function handleSubmit(e) {
-        e.preventDefault();
-    }
+const TaskList = ({taskList, onDelete, onComplete}) => {
+    const taskListQuantity = taskList.length;
+    const completedTaskList = taskList.filter(task => task.isCompleted).lenth;
+    console.log(completedTaskList);
+
     return(
-        <form onSubmit={handleSubmit}>
-            <div className="todo-list">
-                <div className="file-input">
-                    <input type="text" className="text" placeholder="Add your task" />
-                    <button type="submit" className="button pink">Add</button>
+        <section className={style.tasks}>
+            <header className={style.header}>
+                <div>
+                    <p>Crear tu tarea</p>
+                    <span>{taskListQuantity}</span>
                 </div>
-                <Task />
-            </div>
-            <div>
-                <label>You have 3 pending tasks </label>
-                <button type="reset" className="button blue">Clear all</button>
-            </div>
-            
-        </form>
 
+                <div>
+                    <p className={style.textPurple}>Tarea completa</p>
+                    <span>{completedTaskList} De {taskListQuantity}</span>
+                </div>
+            </header>
+
+            <div className={style.list}>
+                {taskList.map((task) => (<Task key={task.id} task={task} onDelete={onDelete} onComplete={onComplete} />))}
+            </div>
+        </section>
     );
 }
 
