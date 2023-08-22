@@ -4,7 +4,6 @@ import style from "../style/taskLists.module.css";
 const TaskList = ({taskList, onDelete, onComplete}) => {
     const taskListQuantity = taskList.length;
     const completedTaskList = taskList.filter(task => task.isCompleted).lenth;
-    console.log(completedTaskList);
 
     return(
         <section className={style.tasks}>
@@ -15,7 +14,7 @@ const TaskList = ({taskList, onDelete, onComplete}) => {
                 </div>
 
                 <div>
-                    <p className={style.textPurple}>Tarea completa</p>
+                    <p className={style.textPurple}>Tareas pendientes</p>
                     <span>{completedTaskList} De {taskListQuantity}</span>
                 </div>
             </header>
